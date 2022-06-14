@@ -50,14 +50,13 @@ const dotBtn = document.querySelector('.dot');
 
 numbers.forEach(number => {
     number.addEventListener('click', () => handleNumberInput(number.textContent));
-    // number.addEventListener('keydown', () => handleNumberInput(number.textContent));
 });
 
 operators.forEach(method => {
     method.addEventListener('click', () => handleOperatorInput(method.textContent));
 });
 
-// Add over event on the buttons
+// Add hover over event on the buttons
 btns.forEach(btn => {
     btn.addEventListener('mouseover', () => {
         if (btn.textContent === '.' && display.textContent.includes('.')) {
@@ -156,11 +155,13 @@ function calculate(input) {
 }
 
 // full clear
-fullClear.addEventListener('click', () => {
+fullClear.addEventListener('click', () => deleteAll());
+
+function deleteAll() {
     display.textContent = '0';
     history.textContent = 'Ans: ';
     resetVariables();
-});
+}
 
 function resetVariables() {
     num1 = Number.MIN_SAFE_INTEGER;
@@ -169,7 +170,9 @@ function resetVariables() {
 }
 
 // single clear
-singleClear.addEventListener('click', () => {
+singleClear.addEventListener('click', () => deleteLastChar());
+
+function deleteLastChar() {
     // if display === 0, do nothing
     if (display.textContent === '0') {
         return;
@@ -201,8 +204,23 @@ singleClear.addEventListener('click', () => {
         operator = '';
         display.textContent = display.textContent.slice(0, -1);
     }
-})
+}
 
+// keyboard support
+document.addEventListener('keydown', (event) => {
+    let pressedKey = event.key;
+    pressedKey = pressedKey === 'Enter' ? '=' : pressedKey;
+    let operatorKeys = 'x+-/=%';
 
-// TODO: add keyboard support
-// TODO: add transition when keyboard item is clicked
+    if (!isNaN(parseInt(pressedKey)) || pressedKey === '.') {
+        // if input is number
+        handleNumberInput(pressedKey);
+    } else if (operatorKeys.includes(pressedKey)) {
+        // operator key
+        handleOperatorInput(pressedKey);
+    } else if (pressedKey === 'Backspace') {
+        deleteLastChar();
+    } else if (pressedKey === 'Delete') {
+        deleteAll();
+    }
+});
