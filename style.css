@@ -1,6 +1,7 @@
 body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     height: 716px;
     background-color: #000000;
@@ -8,7 +9,7 @@ body {
 }
 
 .container {
-    /* box-shadow: 40px; */
+    box-shadow: 0 0 10px 1px rgb(80, 80, 80);
     padding: 12px;
     border-radius: 16px;
     display: flex;
@@ -31,7 +32,7 @@ body {
 
 .display .history {
     font-size: 48px;
-    color:rgb(54, 54, 54);
+    color: rgb(54, 54, 54);
     display: flex;
 }
 
@@ -48,12 +49,13 @@ body {
     height: 72px;
     width: 72px;
     color: #738B9B;
-    /* add transition to buttons when hovered */
     font-size: 24px;
 }
 
-.btn:hover{
+.btn-hover {
     cursor: grab;
+    transform: scale(1.1);
+    /* box-shadow: 0 0 5px 1px rgb(147, 147, 147); */
 }
 
 .left {
@@ -93,4 +95,13 @@ body {
     color: white;
     font-weight: 700;
     font-size: 32px;
+}
+
+.footer {
+    color: aliceblue;
+}
+
+a {
+    text-decoration: underline;
+    color: aliceblue;
 }
