@@ -210,6 +210,7 @@ function deleteLastChar() {
 document.addEventListener('keydown', (event) => {
     let pressedKey = event.key;
     pressedKey = pressedKey === 'Enter' ? '=' : pressedKey;
+    pressedKey = pressedKey === '*' ? 'x' : pressedKey;
     let operatorKeys = 'x+-/=%';
 
     if (!isNaN(parseInt(pressedKey)) || pressedKey === '.') {
